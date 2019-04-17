@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>click</title>
+</head>
+<style>
+
+</style>
+<body class="body">
+
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+    $(".body").mousedown(function(e){
+        var arr = ['富强','民主','文明','和谐','自由','平等','公正','法制','爱国','敬业','诚信','友善']
+        switch(e.which){
+            //左键点击
+            case 1:{
+                //计算鼠标点击坐标
+                var x = e.originalEvent.x ||e.originalEvent.layerX || 0
+                var y = e.originalEvent.y ||e.originalEvent.layerY || 0
+                //随机取出文字
+                var index = Math.floor((Math.random()*arr.length))
+                var text = arr[index]
+                //调用文字显示函数
+                createDiv(x,y,text)
+                //文字出现后固定时间内消失
+                $('.newdiv').delay(600).hide(0)
+                break
+            }
+        }
+    })
+    function createDiv (x,y,text) {
+        //文字颜色
+        var colorArr = [
+            'red','yellow','green','blue','orange','black'
+        ]
+        //随机取出颜色
+        var colorIndex = Math.floor((Math.random()*colorArr.length))
+        var color = colorArr[colorIndex]
+        //在鼠标点击处创建一个div用来显示文字
+        newDiv = $("<div></div>")
+        newDiv.css({
+            'position':'absolute',
+            'width':'40px',
+            'height':'30px',
+            'left': x-15 + 'px',
+            'top': + y-20 +'px',
+            'text-align':'center',
+            'color':color
+        })
+        newDiv.addClass('newdiv')
+        $('.body').html(newDiv)
+
+
+
+        $('.newdiv').html(text)
+        //动画效果
+        $('.newdiv').animate({top:+ y-35 +'px'})
+    }
+</script>
+</html>
